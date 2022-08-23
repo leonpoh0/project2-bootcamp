@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/leonpoh0/portfolio-project.git/static/css/main.d0753a41.css",
+    "main.js": "/leonpoh0/portfolio-project.git/static/js/main.57134f24.js",
+    "index.html": "/leonpoh0/portfolio-project.git/index.html",
+    "main.d0753a41.css.map": "/leonpoh0/portfolio-project.git/static/css/main.d0753a41.css.map",
+    "main.57134f24.js.map": "/leonpoh0/portfolio-project.git/static/js/main.57134f24.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d0753a41.css",
+    "static/js/main.57134f24.js"
+  ]
+}
