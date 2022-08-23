@@ -1,20 +1,25 @@
-import React from "react";
-import logo from "./logo.png";
 import "./App.css";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Home from "./Pages/Home";
+import Landing from "./Pages/Landing";
+import ErrorPage from "./Pages/ErrorPage";
+import AddTransactions from "./Components/AddTransaction";
 
-class App extends React.Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-        </header>
-      </div>
-    );
-  }
+function App() {
+  return (
+    <Router>
+      <nav>
+        <Link to="/"> FINesse</Link>
+        <Link to="/"> Logout</Link>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/Home" element={<Home />} />
+        <Route path="/Add" element={<AddTransactions />} />
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
