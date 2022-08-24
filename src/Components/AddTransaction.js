@@ -7,6 +7,7 @@ import Modal from "react-bootstrap/Modal";
 import { database } from "../firebase.js";
 import axios from "axios";
 import { TransactionModalContext } from "../Contexts/TransactionModalContext";
+
 // import ".../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 const TRANSACTION_FOLDER_NAME = "transactions1";
@@ -28,8 +29,8 @@ function AddTransaction(props) {
     set(newTransactionRef, {
       name: inputField.name,
       currency: inputField.currency,
-      value: inputField.value,
-      valueSgd: inputField.valueSgd,
+      value: Number(inputField.value),
+      valueSgd: Number(inputField.valueSgd),
       time: currentTime,
     }).then(() => {
       setShow(false);
@@ -60,7 +61,7 @@ function AddTransaction(props) {
         )
         .then((response) => {
           exchangeMultiplier = response.data.result.records[0][currencyInput];
-          newField.valueSgd = valueInput * exchangeMultiplier;
+          newField.valueSgd = (valueInput * exchangeMultiplier).toFixed(2);
           setInputField(newField);
         });
     } else {
