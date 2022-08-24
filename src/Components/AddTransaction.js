@@ -26,17 +26,24 @@ function AddTransaction(props) {
     const newTransactionRef = push(transactionsRef);
     let currentTime = moment(new Date()).format("YYYY-MM-DD HH:mm");
     set(newTransactionRef, {
-      message: inputField,
+      name: inputField.name,
+      currency: inputField.currency,
+      value: inputField.value,
+      valueSgd: inputField.valueSgd,
       time: currentTime,
     }).then(() => {
       setShow(false);
-      setInputField({});
+      setInputField({
+        name: "",
+        currency: "SGD",
+        value: 0,
+        valueSgd: 0,
+      });
     });
   };
 
   const handleFormChange = (event) => {
     let newField = { ...inputField };
-    console.log(newField);
     if (event.target.name === "value") {
       newField[event.target.name] = parseInt(event.target.value);
     } else {
