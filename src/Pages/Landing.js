@@ -1,5 +1,7 @@
 import "../App.css";
 import React from "react";
+import Register from "./Register";
+import Login from "./Login";
 
 function Landing() {
   function checkEmail() {
@@ -26,6 +28,8 @@ function Landing() {
         <input type="Submit" value="Login" />
       </form>
       <div>Don’t have an account? Click here to register.</div>
+      <Login />
+      <Register />
     </div>
   );
 }
