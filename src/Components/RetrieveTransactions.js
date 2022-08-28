@@ -3,13 +3,12 @@ import { database } from "../firebase.js";
 import "../App.css";
 import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
-// import ".../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-const TRANSACTION_FOLDER_NAME = "transactions1";
-
-function RetrieveTransactions() {
+function RetrieveTransactions({ user }) {
   const [transactions, setTransactions] = useState([]);
   const [totalSgdAmount, setSgdAmount] = useState(Number(0));
+  const TRANSACTION_FOLDER_NAME = user;
 
   useEffect(() => {
     const transactionsRef = ref(database, TRANSACTION_FOLDER_NAME);
@@ -24,12 +23,17 @@ function RetrieveTransactions() {
       setSgdAmount((prev) => prev + Number(data.val().valueSgd));
     });
     onChildRemoved(transactionsRef, (data) => {
-      setTransactions(() => {
-        const index = transactions.indexOf({
-          key: data.key,
-          value: data.val(),
-        });
-        return transactions.splice(index, 1);
+      setTransactions((prevTransactions) => {
+        // const index = prevTransactions.indexOf({
+        //   key: data.key,
+        //   value: data.val(),
+        // });
+        // console.log(data.key);
+        // console.log(transactions);
+
+        return prevTransactions.filter(
+          (transactionElement) => transactionElement.key !== data.key
+        );
       });
       setSgdAmount((prev) => prev - Number(data.val().valueSgd));
     });

@@ -3,41 +3,53 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./Pages/Home";
 import Landing from "./Pages/Landing";
 import ErrorPage from "./Pages/ErrorPage";
-import AddTransactions from "./Components/AddTransaction";
 import Register from "./Pages/Register";
-import Login from "./Pages/Login";
-import { useAuthValue } from "./Contexts/AuthContext";
-import { onAuthStateChanged } from "firebase/auth";
+import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState(null);
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      const uid = user.uid;
-      // ...
-    } else {
-      // User is signed out
-      // ...
-    }
-  });
+  const signOutAccount = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("Sign out successful.");
+        setUser(null);
+      })
+      .catch((error) => {
+        console.log("Sign out unsuccessul. Error: " + error);
+      });
+  };
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        setUser(uid);
+        console.log(uid);
+      } else {
+        setUser(null);
+      }
+    });
+  }, []);
 
   return (
     <Router>
       <nav>
         <Link to="/"> FINesse</Link>
-        <Link to="/"> Logout</Link>
+        {user ? (
+          <Link to="/" onClick={signOutAccount}>
+            {" "}
+            Logout
+          </Link>
+        ) : (
+          <div></div>
+        )}
       </nav>
       <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/Home" element={<Home />} />
-        <Route path="/Add" element={<AddTransactions />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/Register" element={<Register />} />
+        <Route path="/" element={<Landing setUser={setUser} />} />
+        <Route path="/Register" element={<Register setUser={setUser} />} />
+        <Route path="/Home" element={<Home user={user} />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </Router>

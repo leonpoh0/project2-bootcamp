@@ -10,10 +10,11 @@ import { TransactionModalContext } from "../Contexts/TransactionModalContext";
 
 // import ".../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
-const TRANSACTION_FOLDER_NAME = "transactions1";
-
 function AddTransaction(props) {
   const { show, setShow } = useContext(TransactionModalContext);
+  const userId = props.user;
+  const TRANSACTION_FOLDER_NAME = userId;
+
   const handleClose = () => setShow(false);
   const [inputField, setInputField] = useState({
     name: "",

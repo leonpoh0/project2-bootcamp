@@ -2,7 +2,7 @@ import "../App.css";
 import React from "react";
 import ListOfTransactions from "../Components/ListOfTransactions";
 
-function Home() {
+function Home({ user }) {
   return (
     <div>
       <h3>
@@ -24,7 +24,7 @@ function Home() {
             <h3>Month</h3>
           </div>
           <div>
-            <ListOfTransactions />
+            <ListOfTransactions user={user} />
           </div>
         </div>
       </div>

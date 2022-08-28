@@ -2,15 +2,14 @@ import "../App.css";
 import React, { useState } from "react";
 import { auth } from "../firebase";
 import { useNavigate, Link } from "react-router-dom";
-import { useAuthValue } from "../Contexts/AuthContext";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
-function Register() {
+function Register({ setUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
-  const navigate = useNavigate();
+  let navigate = useNavigate();
 
   const validatePassword = () => {
     let isValid = true;
@@ -30,9 +29,13 @@ function Register() {
       // Create a new user with email and password using firebase
       createUserWithEmailAndPassword(auth, email, password)
         .then((res) => {
-          console.log(res.user);
+          console.log("Registered user: " + res.user);
+          navigate("/Home");
         })
-        .catch((err) => setError(err.message));
+        .catch((err) => {
+          setError(err.message);
+          console.log("Error with login: " + error);
+        });
     }
     setEmail("");
     setPassword("");
@@ -70,7 +73,7 @@ function Register() {
         <button type="submit">Register</button>
       </form>
       <span>
-        Have an account? Click <Link to="/login">here</Link> to login.
+        Have an account? Click <Link to="/">here</Link> to login.
       </span>
     </div>
   );
