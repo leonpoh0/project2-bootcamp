@@ -1,32 +1,44 @@
 import "../App.css";
 import React from "react";
 import ListOfTransactions from "../Components/ListOfTransactions";
+import { useState, useEffect } from "react";
 
-function Home({ user }) {
+function Home() {
+  const [dashboardButton, setDashboardButton] = useState("unselected");
+  const [dataButton, setDataButton] = useState("selected");
+
+  const toggleDashboard = () => {
+    setDashboardButton("selected");
+    setDataButton("unselected");
+  };
+
+  const toggleData = () => {
+    setDashboardButton("unselected");
+    setDataButton("selected");
+  };
+
   return (
-    <div>
-      <h3>
-        View your portfolio denominated in SGD over time or click “My data” to
-        add your data
-      </h3>
-      <h3>
-        Click “Dashboard” to view your portfolio denominated in SGD over time
-      </h3>
+    <div className="App">
       <div>
-        <button>Dashboard</button>
-        <button>My data</button>
+        View your portfolio denominated in SGD over time in "Dashboard" or click
+        “My data” to add your data
       </div>
       <div>
-        <div>Graph</div>
-        <div>
+        <button className={dashboardButton} onClick={toggleDashboard}>
+          Dashboard
+        </button>
+        <button className={dataButton} onClick={toggleData}>
+          My data
+        </button>
+      </div>
+      <div>
+        {dashboardButton === "selected" ? (
+          <div> To be created</div>
+        ) : (
           <div>
-            <h3>Year</h3>
-            <h3>Month</h3>
+            <ListOfTransactions />
           </div>
-          <div>
-            <ListOfTransactions user={user} />
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );

@@ -1,14 +1,32 @@
 import { ref, onChildAdded, remove, onChildRemoved } from "firebase/database";
 import { database } from "../firebase.js";
 import "../App.css";
-import React, { useState, useEffect } from "react";
-import Button from "react-bootstrap/Button";
+import React, { useState, useEffect, useContext } from "react";
+import Card from "react-bootstrap/Card";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { getAuth } from "firebase/auth";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { TransactionRetrieveContext } from "../Contexts/TransactionRetrieveContext";
 
-function RetrieveTransactions({ user }) {
+function RetrieveTransactions() {
+  const { year, month } = useContext(TransactionRetrieveContext);
   const [transactions, setTransactions] = useState([]);
   const [totalSgdAmount, setSgdAmount] = useState(Number(0));
-  const TRANSACTION_FOLDER_NAME = user;
+  const auth = getAuth();
+  const user = auth.currentUser;
+  let uid = "";
+  if (user !== null) {
+    uid = user.uid;
+  }
+
+  let dateForApi = year;
+  if (month.length === 1) {
+    dateForApi += `-0${month}`;
+  } else {
+    dateForApi += `-${month}`;
+  }
+
+  const TRANSACTION_FOLDER_NAME = uid + dateForApi;
 
   useEffect(() => {
     const transactionsRef = ref(database, TRANSACTION_FOLDER_NAME);
@@ -24,13 +42,6 @@ function RetrieveTransactions({ user }) {
     });
     onChildRemoved(transactionsRef, (data) => {
       setTransactions((prevTransactions) => {
-        // const index = prevTransactions.indexOf({
-        //   key: data.key,
-        //   value: data.val(),
-        // });
-        // console.log(data.key);
-        // console.log(transactions);
-
         return prevTransactions.filter(
           (transactionElement) => transactionElement.key !== data.key
         );
@@ -57,20 +68,35 @@ function RetrieveTransactions({ user }) {
   return (
     <div>
       {transactions.map((transaction, index) => (
-        <div key={index}>
-          <p>Name: {transaction.value.name}</p>
-          <p>Currency: {transaction.value.currency}</p>
-          <p>Value: {transaction.value.value}</p>
-          <p>Value in SGD: {transaction.value.valueSgd}</p>
-          <Button
-            variant="primary"
-            onClick={(event) => handleDelete({ transaction })}
-          >
-            Delete
-          </Button>
+        <div className="Transaction-card-full" key={index}>
+          <Card key={index} style={{ width: "400px" }}>
+            <div className="Card-layout">
+              <div className="Card-name">
+                <span className="Card-fields">{transaction.value.name}</span>
+              </div>
+              <div className="Card-value">
+                <div className="Card-value-fields">Amount</div>
+                <div className="Card-fields Card-value-fields">
+                  {transaction.value.currency} {transaction.value.value}
+                </div>
+                <div className="Card-fields Card-value-fields">
+                  SGD {transaction.value.valueSgd}
+                </div>
+              </div>
+              <p
+                aria-label="delete"
+                size="small"
+                onClick={(event) => handleDelete({ transaction })}
+                className="item4"
+              >
+                <DeleteForeverIcon />
+              </p>
+            </div>
+          </Card>
+          <div></div>
         </div>
       ))}
-      <p>Total amount: {totalSgdAmount}</p>
+      <p>Total SGD amount: {totalSgdAmount}</p>
     </div>
   );
 }

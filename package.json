@@ -4,7 +4,12 @@
   "homepage": "https://github.com/leonpoh0/project2-bootcamp.git",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/icons-material": "^5.10.3",
+    "@mui/material": "^5.10.3",
     "bootstrap": "^5.2.0",
+    "mui": "0.0.1",
     "react": "^18.1.0",
     "react-currency-input-field": "^3.6.4",
     "react-dom": "^18.1.0",

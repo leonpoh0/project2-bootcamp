@@ -1,10 +1,49 @@
 .App {
   text-align: center;
+  -webkit-appearance: none;
+  background-color: #f8f9fc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Nav-bar {
+  background-color: #ffffff;
+  height: 60px;
+  box-shadow: 0px 4px 4px grey;
+  margin: 0 0 30px 0;
+  padding: 1em;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Main-logo {
+  font-size: 24px;
+  font-weight: bolder;
+  font-style: italic;
+  background: -webkit-linear-gradient(#002f6c, #bedaff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 8px;
+  padding: 8px;
+  font-family: "Lato", sans-serif;
+}
+
+.Nar-bar-login-links {
+  display: flex;
+  align-items: center;
+}
+
+.Nav-bar-links {
+  padding: 8px;
+  background: -webkit-linear-gradient(rgb(54, 59, 67), rgb(54, 59, 67));
+  font-family: var(--bs-body-font-family);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 21px;
 }
 
 .App-header {
@@ -16,4 +55,110 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.Profile-image {
+  max-width: 400px;
+  height: auto;
+}
+
+.Login-box {
+  width: 384px;
+  background-color: white;
+  box-shadow: 1px 1px 4px grey;
+  padding: 20px 10px;
+  margin: 10px;
+}
+
+.Login-input {
+  margin: 2px;
+}
+
+.Login-button {
+  background-image: linear-gradient(to right, #644dcf, #002f6c);
+  font-weight: bolder;
+  color: white;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  box-shadow: 0 0 20px #eee;
+  border-radius: 20px;
+  padding: 5px 10px;
+}
+
+.Upload-file {
+  margin-bottom: 10px;
+}
+
+.selected {
+  box-shadow: 0 0 20px #eee;
+  padding: 5px 10px;
+  font-weight: bolder;
+  border-width: 2px;
+  width: 200px;
+  margin-top: 20px;
+}
+
+.unselected {
+  padding: 5px 10px;
+  font-weight: normal;
+  width: 200px;
+  margin-top: 20px;
+}
+
+.Profile-image {
+  width: 300px;
+  height: 300px;
+  object-fit: scale-down;
+}
+
+.Date-input {
+  margin: 10px 5px 50px 10px;
+  font-weight: bold;
+}
+
+.Date-input-list {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.Card-fields {
+  font-weight: bold;
+}
+
+.Card-layout {
+  display: grid;
+  margin: 20px;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "name .  pl"
+    ". . value";
+}
+
+.Card-name {
+  grid-area: name;
+  text-align: left;
+}
+
+.Card-value {
+  grid-area: value;
+}
+
+.item4 {
+  grid-area: pl;
+  text-align: right;
+}
+
+.Card-value-fields {
+  text-align: right;
+}
+
+.Transaction-card-full {
+  display: flex;
+}
+
+@media screen and (max-width: 768px) {
+}
+
+@media screen and (max-width: 480px) {
 }

@@ -29,7 +29,7 @@ function Register({ setUser }) {
       // Create a new user with email and password using firebase
       createUserWithEmailAndPassword(auth, email, password)
         .then((res) => {
-          console.log("Registered user: " + res.user);
+          console.log("Registered user: " + res.user.uid);
           navigate("/Home");
         })
         .catch((err) => {
@@ -43,38 +43,46 @@ function Register({ setUser }) {
   };
 
   return (
-    <div>
-      <h3>Create an account with an email address and password below.</h3>
-      <form onSubmit={register} name="registration_form">
-        <input
-          type="email"
-          value={email}
-          placeholder="Enter your email"
-          required
-          onChange={(e) => setEmail(e.target.value)}
-        />
+    <div className="App">
+      <div>Create an account with an email address and password below.</div>
+      <div className="Login-box">
+        <form onSubmit={register} name="registration_form">
+          <div>
+            <input
+              type="email"
+              value={email}
+              placeholder="Enter your email"
+              required
+              onChange={(e) => setEmail(e.target.value)}
+              className="Login-input"
+            />
 
-        <input
-          type="password"
-          value={password}
-          required
-          placeholder="Enter your password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
+            <input
+              type="password"
+              value={password}
+              required
+              placeholder="Enter your password"
+              onChange={(e) => setPassword(e.target.value)}
+              className="Login-input"
+            />
 
-        <input
-          type="password"
-          value={confirmPassword}
-          required
-          placeholder="Confirm password"
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
+            <input
+              type="password"
+              value={confirmPassword}
+              required
+              placeholder="Confirm password"
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </div>
 
-        <button type="submit">Register</button>
-      </form>
-      <span>
-        Have an account? Click <Link to="/">here</Link> to login.
-      </span>
+          <button type="submit" className="Login-button">
+            Register
+          </button>
+        </form>
+        <span>
+          Have an account? Click <Link to="/">here</Link> to login.
+        </span>
+      </div>
     </div>
   );
 }

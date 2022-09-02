@@ -30,31 +30,39 @@ function Landing({ setUser }) {
   };
 
   return (
-    <div>
-      <h3>Login with your email address and password below.</h3>
-      <form onSubmit={login} name="login_form">
-        <input
-          type="email"
-          value={email}
-          placeholder="Enter your email"
-          required
-          onChange={(e) => setEmail(e.target.value)}
-        />
+    <div className="App">
+      <div>Login with your email address and password below.</div>
+      <div className="Login-box">
+        <form onSubmit={login} name="login_form">
+          <div>
+            <input
+              type="email"
+              value={email}
+              placeholder="Enter your email"
+              required
+              onChange={(e) => setEmail(e.target.value)}
+              className="Login-input"
+            />
 
-        <input
-          type="password"
-          value={password}
-          required
-          placeholder="Enter your password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
+            <input
+              type="password"
+              value={password}
+              required
+              placeholder="Enter your password"
+              onChange={(e) => setPassword(e.target.value)}
+              className="Login-input"
+            />
+          </div>
 
-        <button type="submit">Login</button>
-      </form>
-      <span>
-        Don't have an account? Click <Link to="/register">here</Link> to
-        register
-      </span>
+          <button type="submit" className="Login-button">
+            Login
+          </button>
+        </form>
+        <span>
+          Don't have an account? Click <Link to="/register">here</Link> to
+          register
+        </span>
+      </div>
     </div>
   );
 }

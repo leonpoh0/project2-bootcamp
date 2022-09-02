@@ -4,6 +4,7 @@ import Home from "./Pages/Home";
 import Landing from "./Pages/Landing";
 import ErrorPage from "./Pages/ErrorPage";
 import Register from "./Pages/Register";
+import Profile from "./Pages/Profile";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import { useState, useEffect } from "react";
@@ -35,21 +36,34 @@ function App() {
 
   return (
     <Router>
-      <nav>
-        <Link to="/"> FINesse</Link>
-        {user ? (
-          <Link to="/" onClick={signOutAccount}>
-            {" "}
-            Logout
-          </Link>
-        ) : (
-          <div></div>
-        )}
-      </nav>
+      <div>
+        <nav className="Nav-bar">
+          <span className="Main-logo">FINesse</span>
+          {user ? (
+            <div className="Nar-bar-login-links">
+              <Link to="/Home" className="Nav-bar-links">
+                {" "}
+                Home
+              </Link>
+              <Link to="/Profile" className="Nav-bar-links">
+                {" "}
+                Profile
+              </Link>
+              <Link to="/" onClick={signOutAccount} className="Nav-bar-links">
+                {" "}
+                Logout
+              </Link>
+            </div>
+          ) : (
+            <div></div>
+          )}
+        </nav>
+      </div>
       <Routes>
         <Route path="/" element={<Landing setUser={setUser} />} />
         <Route path="/Register" element={<Register setUser={setUser} />} />
-        <Route path="/Home" element={<Home user={user} />} />
+        <Route path="/Home" element={<Home />} />
+        <Route path="/Profile" element={<Profile />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </Router>

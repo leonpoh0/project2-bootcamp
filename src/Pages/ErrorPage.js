@@ -5,15 +5,16 @@ import { useNavigate } from "react-router-dom";
 function ErrorPage() {
   let navigate = useNavigate();
   return (
-    <div>
-      <h3>
+    <div className="App">
+      <div>
         You have reached an error page. Click the button below to return to the
         landing page.
-      </h3>
+      </div>
       <button
         onClick={() => {
           navigate("/");
         }}
+        className="Login-button"
       >
         Return
       </button>
