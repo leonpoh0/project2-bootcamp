@@ -19,16 +19,15 @@ function RetrieveTransactions() {
     uid = user.uid;
   }
 
-  let dateForApi = year;
-  if (month.length === 1) {
-    dateForApi += `-0${month}`;
-  } else {
-    dateForApi += `-${month}`;
-  }
-
-  const TRANSACTION_FOLDER_NAME = uid + dateForApi;
-
   useEffect(() => {
+    let dateForApi = year;
+    if (month.length === 1) {
+      dateForApi += `-0${month}`;
+    } else {
+      dateForApi += `-${month}`;
+    }
+
+    const TRANSACTION_FOLDER_NAME = uid + dateForApi;
     const transactionsRef = ref(database, TRANSACTION_FOLDER_NAME);
     onChildAdded(transactionsRef, (data) => {
       setTransactions((prev) => [
@@ -51,6 +50,13 @@ function RetrieveTransactions() {
   }, []);
 
   const handleDelete = (transaction) => {
+    let dateForApi = year;
+    if (month.length === 1) {
+      dateForApi += `-0${month}`;
+    } else {
+      dateForApi += `-${month}`;
+    }
+    const TRANSACTION_FOLDER_NAME = uid + dateForApi;
     console.log(transaction.transaction.key);
     const transactionsRef = ref(
       database,

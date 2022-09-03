@@ -20,16 +20,18 @@ function Home() {
   return (
     <div className="App">
       <div>
-        View your portfolio denominated in SGD over time in "Dashboard" or click
-        “My data” to add your data
+        {/* View your portfolio denominated in SGD over time in "Dashboard" or click
+        “My data” to add your data */}
+        Consolidate your accounts across different currencies to view the total
+        amount in SGD.
       </div>
       <div>
-        <button className={dashboardButton} onClick={toggleDashboard}>
+        {/* <button className={dashboardButton} onClick={toggleDashboard}>
           Dashboard
         </button>
         <button className={dataButton} onClick={toggleData}>
           My data
-        </button>
+        </button> */}
       </div>
       <div>
         {dashboardButton === "selected" ? (

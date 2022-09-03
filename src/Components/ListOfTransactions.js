@@ -10,7 +10,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 function ListOfTransactions() {
   const [show, setShow] = useState(false);
   const [year, setYear] = useState(2022);
-  const [month, setMonth] = useState(7);
+  const [month, setMonth] = useState("7");
 
   const handleShow = () => setShow(true);
 
@@ -25,8 +25,8 @@ function ListOfTransactions() {
   return (
     <div>
       <div className="Date-input-list">
-        <span className="Date-input">Year</span>
-        <select
+        {/* <span className="Date-input">Year</span> */}
+        {/* <select
           name="year"
           value={year}
           onChange={(event) => handleYearChange(event)}
@@ -44,9 +44,9 @@ function ListOfTransactions() {
           <option value="2020">2020</option>
           <option value="2021">2021</option>
           <option value="2022">2022</option>
-        </select>
-        <span className="Date-input">Month</span>
-        <select
+        </select> */}
+        {/* <span className="Date-input">Month</span> */}
+        {/* <select
           name="month"
           value={month}
           onChange={(event) => handleMonthChange(event)}
@@ -63,7 +63,7 @@ function ListOfTransactions() {
           <option value="10">Oct</option>
           <option value="11">Nov</option>
           <option value="12">Dec</option>
-        </select>
+        </select> */}
       </div>
       <div className="Transactions-list">
         <TransactionRetrieveContext.Provider value={{ year, month }}>
